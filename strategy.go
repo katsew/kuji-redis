@@ -27,6 +27,15 @@ func (rs KujiRedisStrategy) PickOneByKey(s string) (string, error) {
 	return res.Result()
 }
 
+func (rs KujiRedisStrategy) PickAndDeleteOneByKey(s string) (string, error) {
+	length := rs.client.LLen(s)
+	random := rs.util.RandomNumberFromRange(0, length.Val())
+	fmt.Printf("Output rand: %d\n", random)
+	res := rs.client.LIndex(s, random)
+	rs.client.LRem(s, 1, random)
+	return res.Result()
+}
+
 func (rs KujiRedisStrategy) RegisterCandidatesWithKey(s string, c []kuji.KujiCandidate) (int64, error) {
 	var res *redis.IntCmd
 	for _, v := range rs.util.SpreadCandidates(c) {
