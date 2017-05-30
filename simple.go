@@ -7,13 +7,13 @@ import (
 
 type SimpleStrategy struct {
 	client *redis.Client
-	util *kuji.Util
+	util   *kuji.Util
 }
 
-func NewSimpleStrategy(o *redis.Options) (SimpleStrategy) {
+func NewSimpleStrategy(o *redis.Options) SimpleStrategy {
 	return SimpleStrategy{
 		client: redis.NewClient(o),
-		util: &kuji.Util{},
+		util:   &kuji.Util{},
 	}
 }
 

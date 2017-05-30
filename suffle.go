@@ -7,13 +7,13 @@ import (
 
 type ShuffleStrategy struct {
 	client *redis.Client
-	util *kuji.Util
+	util   *kuji.Util
 }
 
-func NewShuffleStrategy(o *redis.Options) (ShuffleStrategy) {
+func NewShuffleStrategy(o *redis.Options) ShuffleStrategy {
 	return ShuffleStrategy{
 		client: redis.NewClient(o),
-		util: &kuji.Util{},
+		util:   &kuji.Util{},
 	}
 }
 
