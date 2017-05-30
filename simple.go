@@ -44,3 +44,13 @@ func (s SimpleStrategy) RegisterCandidatesWithKey(key string, candidates []kuji.
 	}
 	return res.Result()
 }
+
+func (s SimpleStrategy) Len(key string) (int64, error) {
+	res := s.client.LLen(key)
+	return res.Result()
+}
+
+func (s SimpleStrategy) List(key string) ([]string, error) {
+	res := s.client.LRange(key, 0, -1)
+	return res.Result()
+}

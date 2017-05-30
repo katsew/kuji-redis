@@ -41,3 +41,13 @@ func (s ShuffleStrategy) RegisterCandidatesWithKey(key string, c []kuji.KujiCand
 	}
 	return res.Result()
 }
+
+func (s ShuffleStrategy) Len(key string) (int64, error) {
+	res := s.client.LLen(key)
+	return res.Result()
+}
+
+func (s ShuffleStrategy) List(key string) ([]string, error) {
+	res := s.client.LRange(key, 0, -1)
+	return res.Result()
+}
